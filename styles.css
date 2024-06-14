@@ -18,6 +18,13 @@
   transform: translate(-50%, -50%);
 }
 
+.container h1 {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
 .container #canvas {
   background-color: #fff;
 }
@@ -74,4 +81,10 @@
 
 .container .eraser-box:hover {
   background-color: #eee;
+}
+
+.container #line-width {
+  position: absolute;
+  right: 0;
+  bottom: -25px;
 }

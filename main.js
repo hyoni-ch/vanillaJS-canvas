@@ -1,3 +1,4 @@
+const lineWidth = document.querySelector("#line-width");
 const colorBox = document.querySelectorAll(".color-box");
 const eraser = document.querySelector("#eraser");
 const canvas = document.querySelector("#canvas");
@@ -5,7 +6,7 @@ const ctx = canvas.getContext("2d");
 
 let isDrawing = false;
 
-ctx.lineWidth = 5;
+ctx.lineWidth = lineWidth.value;
 ctx.lineCap = "round";
 
 const draw = (e) => {
@@ -35,6 +36,11 @@ canvas.addEventListener("mouseout", () => {
   isDrawing = false;
 });
 canvas.addEventListener("mousemove", draw);
+
+lineWidth.addEventListener("change", (e) => {
+  ctx.lineWidth = e.target.value;
+  ctx.beginPath();
+});
 
 colorBox.forEach((color) => {
   color.addEventListener("click", changeColor);
