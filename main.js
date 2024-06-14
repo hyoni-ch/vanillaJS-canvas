@@ -18,12 +18,12 @@ const draw = (e) => {
     ctx.stroke();
     return;
   }
+  ctx.beginPath();
   ctx.moveTo(x, y);
 };
 
 const changeColor = (e) => {
   ctx.strokeStyle = e.target.id;
-  ctx.beginPath();
 };
 
 canvas.addEventListener("mousedown", () => {
@@ -39,7 +39,6 @@ canvas.addEventListener("mousemove", draw);
 
 lineWidth.addEventListener("change", (e) => {
   ctx.lineWidth = e.target.value;
-  ctx.beginPath();
 });
 
 colorBox.forEach((color) => {
@@ -48,5 +47,4 @@ colorBox.forEach((color) => {
 
 eraser.addEventListener("click", () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.beginPath();
 });
