@@ -45,42 +45,46 @@
   width: 50px;
   height: 50px;
   cursor: pointer;
+
+  &#black {
+    background-color: black;
+  }
+
+  &#red {
+    background-color: red;
+  }
+
+  &#blue {
+    background-color: blue;
+  }
+
+  &#green {
+    background-color: green;
+  }
+
+  &#pink {
+    background-color: pink;
+  }
 }
 
-.container .color-container .color-box#black {
-  background-color: black;
-}
-
-.container .color-container .color-box#red {
-  background-color: red;
-}
-
-.container .color-container .color-box#blue {
-  background-color: blue;
-}
-
-.container .color-container .color-box#green {
-  background-color: green;
-}
-
-.container .color-container .color-box#pink {
-  background-color: pink;
-}
-
-.container .eraser-box {
-  width: 100px;
+.container .eraser-container {
+  display: flex;
   height: 30px;
   position: absolute;
   left: 0;
   bottom: -30px;
-  border: 1px solid gray;
   line-height: 30px;
   text-align: center;
   cursor: pointer;
 }
 
-.container .eraser-box:hover {
-  background-color: #eee;
+.container .eraser-container .eraser-box {
+  padding-inline: 10px;
+  margin-right: 5px;
+  border: 1px solid gray;
+  &:hover {
+    color: #bbb;
+  }
 }
 
 .container #line-width {

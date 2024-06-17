@@ -1,8 +1,12 @@
 const lineWidth = document.querySelector("#line-width");
 const colorBox = document.querySelectorAll(".color-box");
-const eraser = document.querySelector("#eraser");
+const screenClearBtn = document.querySelector("#screen-clear-btn");
+const redoBtn = document.querySelector("#redo-btn");
+const memoryClearBtn = document.querySelector("#memory-clear-btn");
 const canvas = document.querySelector("#canvas");
 const ctx = canvas.getContext("2d");
+
+const data = [];
 
 let isDrawing = false;
 
@@ -38,7 +42,7 @@ const changeLineWidth = (e) => {
   ctx.lineWidth = e.target.value;
 };
 
-const eraserAll = () => {
+const screenClear = () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 };
 
@@ -50,4 +54,5 @@ lineWidth.addEventListener("change", changeLineWidth);
 colorBox.forEach((color) => {
   color.addEventListener("click", changeColor);
 });
-eraser.addEventListener("click", eraserAll);
+screenClearBtn.addEventListener("click", screenClear);
+redoBtn.addEventListener("click", () => {});
