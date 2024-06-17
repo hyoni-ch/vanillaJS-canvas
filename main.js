@@ -22,29 +22,32 @@ const draw = (e) => {
   ctx.moveTo(x, y);
 };
 
+const drawTrue = () => {
+  isDrawing = true;
+};
+
+const drawFalse = () => {
+  isDrawing = false;
+};
+
 const changeColor = (e) => {
   ctx.strokeStyle = e.target.id;
 };
 
-canvas.addEventListener("mousedown", () => {
-  isDrawing = true;
-});
-canvas.addEventListener("mouseup", () => {
-  isDrawing = false;
-});
-canvas.addEventListener("mouseout", () => {
-  isDrawing = false;
-});
-canvas.addEventListener("mousemove", draw);
-
-lineWidth.addEventListener("change", (e) => {
+const changeLineWidth = (e) => {
   ctx.lineWidth = e.target.value;
-});
+};
 
+const eraserAll = () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+};
+
+canvas.addEventListener("mousedown", drawTrue);
+canvas.addEventListener("mouseup", drawFalse);
+canvas.addEventListener("mouseout", drawFalse);
+canvas.addEventListener("mousemove", draw);
+lineWidth.addEventListener("change", changeLineWidth);
 colorBox.forEach((color) => {
   color.addEventListener("click", changeColor);
 });
-
-eraser.addEventListener("click", () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-});
+eraser.addEventListener("click", eraserAll);
