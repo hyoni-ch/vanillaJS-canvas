@@ -3,6 +3,7 @@ const colorBox = document.querySelectorAll(".color-box");
 const screenClearBtn = document.querySelector("#screen-clear-btn");
 const undoBtn = document.querySelector("#undo-btn");
 const redoBtn = document.querySelector("#redo-btn");
+const returnBtn = document.querySelector("#return-btn");
 const memoryClearBtn = document.querySelector("#memory-clear-btn");
 const canvas = document.querySelector("#canvas");
 const ctx = canvas.getContext("2d");
@@ -29,10 +30,6 @@ const draw = (e) => {
   }
   ctx.beginPath();
   ctx.moveTo(x, y);
-};
-
-const drawTrue = () => {
-  isDrawing = true;
 };
 
 const drawFalse = () => {
@@ -64,6 +61,10 @@ const push = () => {
   // canvas의 그림을 data에 저장 -> canvas.??
   // canvas.toDataURL() : 매개변수 에 지정된 형식의 이미지 표현이 포함된 데이터 URL을 type 반환합니다.
   data.push(canvas.toDataURL());
+  console.log(data);
+};
+const drawTrue = () => {
+  isDrawing = true;
 };
 
 const memoryClear = () => {
@@ -71,24 +72,35 @@ const memoryClear = () => {
   data = [];
 };
 
-undoBtn.addEventListener("click", () => {
+returnBtn.addEventListener("click", () => {
   if (data.length === 0) return;
-  let CanvasImage = new Image();
-  // console.log(data.pop());
-  CanvasImage.src = data.pop();
-  // CanvasImage.src = data[step];
-  CanvasImage.onload = () => {
+  let canvasImage = new Image();
+  canvasImage.src = data[data.length - 1];
+  console.log(canvasImage.src);
+  canvasImage.onload = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(CanvasImage, 0, 0);
+    ctx.drawImage(canvasImage, 0, 0);
   };
 });
 
-// redoBtn.addEventListener("click", () => {
-//   let CanvasImage = new Image();
-//   CanvasImage.src = data[step];
-//   CanvasImage.onload = () => {
+// undoBtn.addEventListener("click", () => {
+//   if (data.length === 0) return;
+//   let canvasImage = new Image();
+//   // console.log(data.pop());
+//   canvasImage.src = data.pop();
+//   // canvasImage.src = data[step];
+//   canvasImage.onload = () => {
 //     ctx.clearRect(0, 0, canvas.width, canvas.height);
-//     ctx.drawImage(CanvasImage, 0, 0);
+//     ctx.drawImage(canvasImage, 0, 0);
+//   };
+// });
+
+// redoBtn.addEventListener("click", () => {
+//   let canvasImage = new Image();
+//   canvasImage.src = data[step];
+//   canvasImage.onload = () => {
+//     ctx.clearRect(0, 0, canvas.width, canvas.height);
+//     ctx.drawImage(canvasImage, 0, 0);
 //   };
 // });
 
@@ -97,7 +109,7 @@ undoBtn.addEventListener("click", () => {
 canvas.addEventListener("mousedown", () => {
   drawTrue();
   // path 하나 그릴 때마다 push
-  push();
+  // push();
 });
 canvas.addEventListener("mouseup", drawFalse);
 canvas.addEventListener("mouseout", drawFalse);
@@ -106,5 +118,8 @@ lineWidth.addEventListener("change", changeLineWidth);
 colorBox.forEach((color) => {
   color.addEventListener("click", changeColor);
 });
-screenClearBtn.addEventListener("click", screenClear);
+screenClearBtn.addEventListener("click", () => {
+  push();
+  screenClear();
+});
 memoryClearBtn.addEventListener("click", memoryClear);
